@@ -1,5 +1,9 @@
 <script>
   import { ready, url } from "@sveltech/routify";
+  import TitleBar from "../components/TitleBar.svelte";
+  import ListItem from "../components/ListItem.svelte";
+  import CoinSummary from "../components/CoinSummary.svelte";
+
   let data = {};
   let coins = [];
   $: getData();
@@ -15,38 +19,62 @@
   }
 </script>
 
-<style lang="scss">
-  $color-vivid-tangerine: #ff9580;
-  $color-spring-wood: #f8f8f2;
-  $color-mint-green: #8aff80;
-  $color-kimberly: #7970a9;
-  $color-hot-pink: #ff80bf;
-  $color-heliotrope: #9580ff;
-  $color-gun-powder: #454158;
-  $color-dolly: #ffff80;
-  $color-chardonnay: #ffca80;
-  $color-charade: #22212c;
-  $color-aquamarine: #80ffea;
-:global(body) {
-  background: $color-charade;
-  color: $color-spring-wood;
-  font-family: 'Nunito', sans-serif;
-}
+<style>
+  section {
+    margin-top: 1.25rem;
+  }
+
+section h2 {
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0;
+    font-weight: 700;
+    font-size: 0.75rem;
+  }
+
+  .earnings-total {
+    color: var(--main-fg-color);
+    text-align: center;
+    letter-spacing: 0;
+    font-weight: 200;
+    font-size: 2.25rem;
+  }
+
+  .earnings-24h {
+    font-weight: 700;
+    font-size: 0.75rem;
+    color: var(--main-gain-color);
+    letter-spacing: 0;
+    text-align: center;
+  }
 </style>
 
 {#if data}
-  <h1>{data.exchange} {data.label}</h1>
-  <p>
-    {data.last_status}<br>
-    <small>{data.last_update}</small>
-  </p>
-  <ul>
-  {#each coins as coin}
-    <li>
-      <a href={$url(`/currency/${coin.toLowerCase()}`)}>{coin}</a>
-    </li>
-  {/each}
-  </ul>
+
+  <TitleBar />
+
+  <section class="summary">
+    <h2>Total earnings since March 14, 2020</h2>
+    <div class="earnings-total">$176.42</div>
+    <div class="earnings-24h">+$3.25 24h</div>
+  </section>
+
+  <section class="currencies">
+    <h2>Earnings by currency</h2>
+    {#each coins as coin}
+    <ListItem href={$url(`/currency/${coin.toLowerCase()}`)}>
+      <CoinSummary {coin} />
+    </ListItem>
+    {/each}
+  </section>
+
+  <section class="module log">
+    <h2>Activity log</h2>
+    <ListItem href={$url(`/activity-log`)}>
+      Using MACD as mindailyrate 0.0142% for BTC
+    </ListItem>
+  </section>
+
 {:else}
   <p>No data :(</p>
 {/if}

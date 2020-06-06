@@ -1,5 +1,6 @@
 <script>
   import { ready, url } from "@sveltech/routify";
+  import TitleBar from "../components/TitleBar.svelte";
 
   let log = [];
 
@@ -15,7 +16,7 @@
   }
 </script>
 
-<h1>Activity Log</h1>
+<TitleBar title="Activity Log" />
 <a href={$url('..')}>Go back</a>
 
 {#if log}
