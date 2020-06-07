@@ -7,6 +7,7 @@ import copy from 'rollup-plugin-copy';
 import del from 'del';
 import autoPreprocess from 'svelte-preprocess';
 import postcss from 'rollup-plugin-postcss';
+import svg from 'rollup-plugin-svg';
 
 const staticDir = 'static';
 const distDir = 'dist';
@@ -33,6 +34,7 @@ function createConfig({ output, inlineDynamicImports, plugins = [] }) {
     },
     plugins: [
       postcss(),
+      svg({ base64: true }),
       copy({
         targets: [
           { src: staticDir + '/**/!(__index.html)', dest: distDir },

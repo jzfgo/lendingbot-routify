@@ -1,6 +1,7 @@
 <script>
   import { ready } from "@sveltech/routify";
   import RadialGraph from "./graphs/RadialGraph.svelte";
+  import btc from "../assets/images/btc.svg";
 
   export let coin;
 
@@ -18,3 +19,5 @@
 </script>
 
 <RadialGraph pct={Math.random(0, 1)} />
+{coin}
+<img src="{btc}" alt="BTC">
