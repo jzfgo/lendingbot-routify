@@ -6,6 +6,7 @@ import { terser } from 'rollup-plugin-terser';
 import copy from 'rollup-plugin-copy';
 import del from 'del';
 import autoPreprocess from 'svelte-preprocess';
+import postcss from 'rollup-plugin-postcss';
 
 const staticDir = 'static';
 const distDir = 'dist';
@@ -31,6 +32,7 @@ function createConfig({ output, inlineDynamicImports, plugins = [] }) {
       ...output,
     },
     plugins: [
+      postcss(),
       copy({
         targets: [
           { src: staticDir + '/**/!(__index.html)', dest: distDir },
