@@ -51,12 +51,12 @@ section h2 {
 
 {#if data}
 
-  <TitleBar />
+  <TitleBar title="Lenny" leftIcon="logo" leftLink={$url('/')} rightIcon="settings" rightLink={$url('/settings')} />
 
   <section class="summary">
     <h2>Total earnings since March 14, 2020</h2>
-    <div class="earnings-total">$176.42</div>
-    <div class="earnings-24h">+$3.25 24h</div>
+    <div class="earnings-total">$181.01</div>
+    <div class="earnings-24h">+$0.16 24h</div>
   </section>
 
   <section class="currencies">

@@ -16,8 +16,26 @@
   }
 </script>
 
-<TitleBar title="Activity Log" />
-<a href={$url('..')}>Go back</a>
+<style>
+  :global(body) {
+    background-color: #17171e;
+  }
+
+  ul {
+    list-style: none;
+    margin: 1.25rem 0.9375rem;
+    padding-left: 0;
+  }
+
+  li {
+    margin-bottom: 20px;
+    font-weight: 700;
+    font-size: 0.75rem;
+    color: --color-spring-wood;
+  }
+</style>
+
+<TitleBar title="Activity Log" leftIcon="back" leftLink={$url('/')} />
 
 {#if log}
   <ul>

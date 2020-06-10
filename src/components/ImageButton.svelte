@@ -1,9 +1,6 @@
 <script>
   export let link;
-  export let img;
-
-  const {src = '', alt = 'Image Button'} = img;
-  const {href = ''} = link;
+  export let icon;
 </script>
 
 <style>
@@ -21,7 +18,11 @@ img {
 </style>
 
 <div class="image-button">
-  <a {href} {...link}>
-    <img {src} {alt} {...img}>
+{#if link}
+  <a href={link}>
+    <svelte:component this={icon} />
   </a>
+{:else}
+  <svelte:component this={icon} />
+{/if}
 </div>

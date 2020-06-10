@@ -1,19 +1,24 @@
 <script>
   import { url } from '@sveltech/routify'
   import ImageButton from './ImageButton.svelte';
-  import logo from '../assets/images/logo.svg';
 
-  export let title = 'Lenny';
+  import LogoIcon from '../assets/images/lenny.svg';
+  import SettingsIcon from '../assets/images/cog.svg';
+  import BackIcon from '../assets/images/angleleft.svg';
 
-  let buttonLeft = {
-    img: {src: logo, alt: 'Image Button', width: 32, height: 32},
-    link: {href:$url('/')}
-  };
+  export let title = '';
 
-let buttonRight = {
-    img: {src: logo, alt: 'Image Button', width: 32, height: 32},
-    link: {href:$url('/')}
-  };
+  export let leftIcon;
+  export let leftLink;
+
+  export let rightIcon;
+  export let rightLink;
+
+  const icons = {
+    logo: LogoIcon,
+    settings: SettingsIcon,
+    back: BackIcon,
+  }
 </script>
 
 <style>
@@ -32,11 +37,12 @@ let buttonRight = {
     line-height: 2.5rem;
     text-align: center;
     color: var(--main-fg-color);
+    margin: 0;
   }
 </style>
 
 <div class="title-bar">
-  <ImageButton img={buttonLeft.img} link={buttonLeft.link} />
+  <ImageButton icon={icons[leftIcon]} link={leftLink} />
   <h1 class="title">{title}</h1>
-  <ImageButton img={buttonRight.img} link={buttonRight.link} />
+  <ImageButton icon={icons[rightIcon]} link={rightLink} />
 </div>

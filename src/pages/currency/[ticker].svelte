@@ -74,8 +74,7 @@
   }
 </style>
 
-<TitleBar title={ticker} />
-<a href={$url('/')}>Go back</a>
+<TitleBar title={ticker} leftIcon="back" leftLink={$url('/')} />
 
 {#if points.length}
 <div class="chart">
