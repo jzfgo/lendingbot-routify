@@ -1,5 +1,4 @@
 <script>
-  import { url } from '@sveltech/routify'
   import ImageButton from './ImageButton.svelte';
 
   import LogoIcon from '../assets/images/lenny.svg';
@@ -7,19 +6,25 @@
   import BackIcon from '../assets/images/angleleft.svg';
 
   export let title = '';
-
-  export let leftIcon;
-  export let leftLink;
-
-  export let rightIcon;
-  export let rightLink;
+  export let left;
+  export let right;
 
   const icons = {
     logo: LogoIcon,
     settings: SettingsIcon,
     back: BackIcon,
-  }
+  };
 </script>
+
+<div class="title-bar">
+{#if left}
+  <ImageButton image={icons[left.icon]} link={left.link} />
+{/if}
+  <h1 class="title">{title}</h1>
+{#if right}
+  <ImageButton image={icons[right.icon]} link={right.link} />
+{/if}
+</div>
 
 <style>
   .title-bar {
@@ -40,9 +45,3 @@
     margin: 0;
   }
 </style>
-
-<div class="title-bar">
-  <ImageButton icon={icons[leftIcon]} link={leftLink} />
-  <h1 class="title">{title}</h1>
-  <ImageButton icon={icons[rightIcon]} link={rightLink} />
-</div>

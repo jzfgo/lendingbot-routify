@@ -1,28 +1,28 @@
 <script>
   export let link;
-  export let icon;
+  export let image;
 </script>
-
-<style>
-.image-button {
-  display: grid;
-}
-
-a {
-  display: grid;
-}
-
-img {
-  place-self: center center;
-}
-</style>
 
 <div class="image-button">
 {#if link}
   <a href={link}>
-    <svelte:component this={icon} />
+    <svelte:component this={image} />
   </a>
 {:else}
-  <svelte:component this={icon} />
+  <svelte:component this={image} />
 {/if}
 </div>
+
+<style>
+  .image-button {
+    display: grid;
+  }
+
+  a {
+    display: grid;
+  }
+
+  img {
+    place-self: center center;
+  }
+</style>

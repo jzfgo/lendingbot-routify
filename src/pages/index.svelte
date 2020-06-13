@@ -4,20 +4,46 @@
   import ListItem from "../components/ListItem.svelte";
   import CoinSummary from "../components/CoinSummary.svelte";
 
-  let data = {};
-  let coins = [];
-  $: getData();
-
-  function getData() {
-    fetch(`/botlog.json`)
-      .then(res => res.json())
-      .then(json => {
-        data = json || {};
-        coins = Object.keys(data.raw_data);
-        $ready();
-      });
-  }
+  const titleBarProps = {
+    title: 'Lenny',
+    left: {
+      icon: 'logo',
+      link: $url('/'),
+    },
+    right: {
+      icon: 'settings',
+      link: $url('/settings'),
+    }
+  };
 </script>
+
+<TitleBar {...titleBarProps} />
+
+<section class="summary">
+  <h2>Total earnings since March 14, 2020</h2>
+  <div class="earnings-total">$181.01</div>
+  <div class="earnings-24h">+$0.16 24h</div>
+</section>
+
+<section class="currencies">
+  <h2>Earnings by currency</h2>
+  <ListItem href={$url(`/currency/btc`)}>
+    <CoinSummary/>
+  </ListItem>
+  <ListItem href={$url(`/currency/eth`)}>
+    <CoinSummary/>
+  </ListItem>
+  <ListItem href={$url(`/currency/usd`)}>
+    <CoinSummary/>
+  </ListItem>
+</section>
+
+<section class="module log">
+  <h2>Activity log</h2>
+  <ListItem href={$url(`/activity-log`)}>
+    Using MACD as mindailyrate 0.0142% for BTC
+  </ListItem>
+</section>
 
 <style>
   section {
@@ -48,33 +74,3 @@ section h2 {
     text-align: center;
   }
 </style>
-
-{#if data}
-
-  <TitleBar title="Lenny" leftIcon="logo" leftLink={$url('/')} rightIcon="settings" rightLink={$url('/settings')} />
-
-  <section class="summary">
-    <h2>Total earnings since March 14, 2020</h2>
-    <div class="earnings-total">$181.01</div>
-    <div class="earnings-24h">+$0.16 24h</div>
-  </section>
-
-  <section class="currencies">
-    <h2>Earnings by currency</h2>
-    {#each coins as coin}
-    <ListItem href={$url(`/currency/${coin.toLowerCase()}`)}>
-      <CoinSummary {coin} />
-    </ListItem>
-    {/each}
-  </section>
-
-  <section class="module log">
-    <h2>Activity log</h2>
-    <ListItem href={$url(`/activity-log`)}>
-      Using MACD as mindailyrate 0.0142% for BTC
-    </ListItem>
-  </section>
-
-{:else}
-  <p>No data :(</p>
-{/if}

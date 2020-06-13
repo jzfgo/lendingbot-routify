@@ -14,7 +14,27 @@
         $ready();
       });
   }
+
+  const titleBarProps = {
+    title: 'Activity Log',
+    left: {
+      icon: 'back',
+      link: $url('/'),
+    }
+  };
 </script>
+
+<TitleBar {...titleBarProps} />
+
+{#if log}
+  <ul>
+	{#each log as logItem}
+    <li>{logItem}</li>
+  {/each}
+  </ul>
+{:else}
+  No activity.
+{/if}
 
 <style>
   :global(body) {
@@ -34,15 +54,3 @@
     color: --color-spring-wood;
   }
 </style>
-
-<TitleBar title="Activity Log" leftIcon="back" leftLink={$url('/')} />
-
-{#if log}
-  <ul>
-	{#each log as logItem}
-    <li>{logItem}</li>
-  {/each}
-  </ul>
-{:else}
-  No activity.
-{/if}
