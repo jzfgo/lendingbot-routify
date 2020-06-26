@@ -19,19 +19,29 @@ const processLog = (data) => {
 };
 
 const processCurrency = (ticker, data, displayCurrency) => {
+  const averageLendingRate = data[ticker].averageLendingRate || 0;
+  const lentSum = data[ticker].lentSum || 0;
+  const maxToLend = data[ticker].maxToLend || 0;
+  const todayEarnings = data[ticker].todayEarnings || 0;
+  const totalCoins = data[ticker].totalCoins || 0;
+  const totalEarnings = data[ticker].totalEarnings || 0;
+  const yesterdayEarnings = data[ticker].yesterdayEarnings || 0;
+  const highestBid = data[ticker].highestBid || 0;
+
   const sameCurrency = ticker == displayCurrency.currency;
   // 1 for BTC and the current display currency, ticker's exchange rate for the rest
-  const tickerRate = sameCurrency ? 1 : data[ticker].highestBid || 1;
+  const tickerRate = sameCurrency || ticker === 'BTC' ? 1 : highestBid;
   // 1 for the current display currency, display currency's exchange rate for the rest
   const exchangeRate = sameCurrency ? 1 : displayCurrency.highestBid;
 
   return {
+    averageLendingRate,
+    earnings24h: yesterdayEarnings * tickerRate * exchangeRate,
+    earningsTotal: totalEarnings * tickerRate * exchangeRate,
+    pctLent: lentSum / maxToLend,
     ticker: ticker.toLowerCase(),
-    pctLent: data[ticker].lentSum / data[ticker].maxToLend,
-    earningsTotal:
-      (data[ticker].totalEarnings || 0) * tickerRate * exchangeRate,
-    earnings24h:
-      (data[ticker].yesterdayEarnings || 0) * tickerRate * exchangeRate,
+    todayEarnings,
+    totalCoins,
   };
 };
 

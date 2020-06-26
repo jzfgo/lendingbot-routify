@@ -42,6 +42,13 @@
     {#if currency}
       <div class="earnings-total">{CURRENCY_FORMATTER.format($earningsTotal)}</div>
       <div class="earnings-24h">+ {CURRENCY_FORMATTER.format($earnings24h)} 24h</div>
+      <div>Average lending rate: {currency.averageLendingRate}</div>
+      <div>Earnings 24h: {currency.earnings24h}</div>
+      <div>Earnings total: {currency.earningsTotal}</div>
+      <div>Percentage lent: {currency.pctLent}</div>
+      <div>Ticker: {currency.ticker}</div>
+      <div>Today earnings: {currency.todayEarnings}</div>
+      <div>Total coins: {currency.totalCoins}</div>
     {/if}
   </section>
 </main>
