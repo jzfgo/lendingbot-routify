@@ -23,5 +23,7 @@
     border-radius: 0.625rem;
     margin: 0.625rem 0.9375rem;
     cursor: pointer;
+
+    fill: var(--color-gun-powder);
   }
 </style>

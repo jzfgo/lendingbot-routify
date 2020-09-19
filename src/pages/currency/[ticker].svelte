@@ -22,7 +22,7 @@
     easing: cubicOut
   });
 
-  const earnings24h = tweened(0, {
+  const earningsToday = tweened(0, {
     duration: 400,
     easing: cubicOut
   });
@@ -30,7 +30,7 @@
   $: [currency] = $data.currencies.filter(currency => currency.ticker === ticker);
   $: if (currency) {
     earningsTotal.set(currency.earningsTotal);
-    earnings24h.set(currency.earnings24h);
+    earningsToday.set(currency.earningsToday);
   }
 </script>
 
@@ -41,13 +41,13 @@
     <h2>Total earnings</h2>
     {#if currency}
       <div class="earnings-total">{CURRENCY_FORMATTER.format($earningsTotal)}</div>
-      <div class="earnings-24h">+ {CURRENCY_FORMATTER.format($earnings24h)} 24h</div>
+      <div class="earnings-yesterday">+ {CURRENCY_FORMATTER.format($earningsToday)} 24h</div>
       <div>Average lending rate: {currency.averageLendingRate}</div>
-      <div>Earnings 24h: {currency.earnings24h}</div>
+      <div>Earnings 24h: {currency.earningsToday}</div>
       <div>Earnings total: {currency.earningsTotal}</div>
       <div>Percentage lent: {currency.pctLent}</div>
       <div>Ticker: {currency.ticker}</div>
-      <div>Today earnings: {currency.todayEarnings}</div>
+      <div>Today earnings: {currency.earningsYesterday}</div>
       <div>Total coins: {currency.totalCoins}</div>
     {/if}
   </section>
@@ -74,7 +74,7 @@
     font-size: 2.25rem;
   }
 
-  .earnings-24h {
+  .earnings-yesterday {
     font-weight: 700;
     font-size: 0.75rem;
     color: var(--main-gain-color);
