@@ -24,7 +24,16 @@
 
   <section class="lent">
     <h2>Amount Lent</h2>
-    <CurrencyDetails pct1={currency.pctLent} pct2={currency.pctLentTotal} value1={currency.lentSum} value2={currency.maxToLend} value3={currency.totalCoins} value1label="lent" value2label="lendable" value3label="total" />
+    <CurrencyDetails
+      pct1={currency.pctLent}
+      pct2={currency.pctLentTotal}
+      value1={currency.lentSum}
+      value2={currency.maxToLend}
+      value3={currency.totalCoins}
+      value1label="lent"
+      value2label="lendable"
+      value3label="total"
+    />
   </section>
 
   <section class="estimation">
