@@ -24,12 +24,12 @@
 
   <section class="lent">
     <h2>Amount Lent</h2>
-    <CurrencyDetails />
+    <CurrencyDetails pct1={currency.pctLent} pct2={currency.pctLentTotal} value1={currency.lentSum} value2={currency.maxToLend} value3={currency.totalCoins} value1label="lent" value2label="lendable" value3label="total" />
   </section>
 
   <section class="estimation">
     <h2>Estimated earnings</h2>
-    <CurrencyDetails />
+    <CurrencyDetails pct2={currency.averageLendingRate} value1label="year" value2label="month" value3label="day" pct1label="APY" pct2label="EDR" />
   </section>
 
   <section class="exchange">

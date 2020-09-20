@@ -94,7 +94,7 @@
     font-size: 0.75rem;
     text-align: center;
     text-transform: uppercase;
-    color: var(--color-gun-powder);
-    fill: var(--color-gun-powder);
+    color: var(--main-muted-color);
+    fill: var(--main-muted-color);
   }
 </style>

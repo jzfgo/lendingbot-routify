@@ -20,7 +20,7 @@ const processLog = (data) => {
 
 const processCurrency = (ticker, data, displayCurrency) => {
   const highestBid = data[ticker].highestBid || 0;
-  const averageLendingRate = data[ticker].averageLendingRate || 0;
+  const averageLendingRate = data[ticker].averageLendingRate / 100 || 0;
   const lentSum = data[ticker].lentSum || 0;
   const maxToLend = data[ticker].maxToLend || 0;
   const totalCoins = data[ticker].totalCoins || 0;
@@ -36,11 +36,14 @@ const processCurrency = (ticker, data, displayCurrency) => {
 
   return {
     averageLendingRate,
+    pctLent: lentSum / maxToLend,
+    pctLentTotal: lentSum / totalCoins,
     earningsTotal: totalEarnings * tickerRate * exchangeRate,
     earningsYesterday: yesterdayEarnings * tickerRate * exchangeRate,
     earningsToday: todayEarnings * tickerRate * exchangeRate,
-    pctLent: lentSum / maxToLend,
     ticker: ticker.toLowerCase(),
+    lentSum,
+    maxToLend,
     totalCoins,
   };
 };

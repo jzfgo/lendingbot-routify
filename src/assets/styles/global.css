@@ -38,6 +38,11 @@ body {
   background-color: var(--main-bg-color);
   color: var(--main-fg-color);
   font-family: Nunito, sans-serif;
+
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 h1,

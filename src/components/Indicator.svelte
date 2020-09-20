@@ -24,7 +24,7 @@
     border-radius: 0.3125rem;
     cursor: pointer;
 
-    fill: var(--color-gun-powder);
+    fill: var(--main-muted-color);
   }
 
   .indicator--bg {
