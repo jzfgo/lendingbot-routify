@@ -16,8 +16,11 @@
   --main-fg-color: var(--color-spring-wood);
   --main-heading-color: var(--color-gun-powder);
 
-  --main-gain-color: var(--color-mint-green);
-  --main-projected-color: var(--color-dolly);
+  --main-success-color: var(--color-mint-green);
+  --main-warning-color: var(--color-dolly);
+  --main-error-color: var(--color-hot-pink);
+  --main-info-color: var(--color-aquamarine);
+  --main-muted-color: var(--color-gun-powder);
 }
 
 *,

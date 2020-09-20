@@ -1,5 +1,4 @@
 <script>
-  import { onMount } from 'svelte';
   import * as timeago from 'timeago.js';
   import { onInterval } from '../utils'
 
@@ -19,14 +18,13 @@
   .log-summary {
     opacity: 0.3;
     color: var(--color-spring-wood);
-    font-size: 0.625rem;
-    letter-spacing: 0;
+    font-size: 0.875rem;
 
     display: grid;
     grid-template-columns: 1fr min-content;
     grid-gap: 1rem;
 
-    margin-left: .75rem;
+    margin: 1rem 0 1rem 1rem;
   }
 
   .log-message {

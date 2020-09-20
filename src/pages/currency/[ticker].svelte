@@ -1,37 +1,17 @@
 <script>
-  import { tweened } from 'svelte/motion';
-  import { cubicOut } from 'svelte/easing';
-
   import { data } from '../../stores'
 
   import TitleBar from "../../components/TitleBar.svelte";
+  import TotalEarnings from "../../components/TotalEarnings.svelte";
+  import CurrencyDetails from "../../components/CurrencyDetails.svelte";
 
   export let ticker;
-
-  const CURRENCY_FORMATTER = new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD',
-  });
 
   const titleBarProps = {
     title: ticker.toLocaleUpperCase(),
   };
 
-  const earningsTotal = tweened(0, {
-    duration: 400,
-    easing: cubicOut
-  });
-
-  const earningsToday = tweened(0, {
-    duration: 400,
-    easing: cubicOut
-  });
-
   $: [currency] = $data.currencies.filter(currency => currency.ticker === ticker);
-  $: if (currency) {
-    earningsTotal.set(currency.earningsTotal);
-    earningsToday.set(currency.earningsToday);
-  }
 </script>
 
 <main>
@@ -39,23 +19,35 @@
 
   <section class="summary">
     <h2>Total earnings</h2>
-    {#if currency}
-      <div class="earnings-total">{CURRENCY_FORMATTER.format($earningsTotal)}</div>
-      <div class="earnings-yesterday">+ {CURRENCY_FORMATTER.format($earningsToday)} 24h</div>
-      <div>Average lending rate: {currency.averageLendingRate}</div>
-      <div>Earnings 24h: {currency.earningsToday}</div>
-      <div>Earnings total: {currency.earningsTotal}</div>
-      <div>Percentage lent: {currency.pctLent}</div>
-      <div>Ticker: {currency.ticker}</div>
-      <div>Today earnings: {currency.earningsYesterday}</div>
-      <div>Total coins: {currency.totalCoins}</div>
-    {/if}
+    <TotalEarnings summary={currency} />
+  </section>
+
+  <section class="lent">
+    <h2>Amount Lent</h2>
+    <CurrencyDetails />
+  </section>
+
+  <section class="estimation">
+    <h2>Estimated earnings</h2>
+    <CurrencyDetails />
+  </section>
+
+  <section class="exchange">
+    <h2>Exchange rate</h2>
   </section>
 </main>
 
 <style>
+  main {
+    background-color: var(--color-charade);
+  }
+
   section {
     margin-top: 1.25rem;
+  }
+
+  section:last-child {
+    padding-bottom: 1.25rem;
   }
 
   section h2 {
@@ -64,21 +56,5 @@
     letter-spacing: 0;
     font-weight: 700;
     font-size: 0.75rem;
-  }
-
-  .earnings-total {
-    color: var(--main-fg-color);
-    text-align: center;
-    letter-spacing: 0;
-    font-weight: 200;
-    font-size: 2.25rem;
-  }
-
-  .earnings-yesterday {
-    font-weight: 700;
-    font-size: 0.75rem;
-    color: var(--main-gain-color);
-    letter-spacing: 0;
-    text-align: center;
   }
 </style>

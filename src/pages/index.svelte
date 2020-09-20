@@ -6,7 +6,7 @@
   import TitleBar from "../components/TitleBar.svelte";
   import TotalEarnings from "../components/TotalEarnings.svelte";
   import ListItem from "../components/ListItem.svelte";
-  import CoinSummary from "../components/CoinSummary.svelte";
+  import CurrencySummary from "../components/CurrencySummary.svelte";
   import LogSummary from "../components/LogSummary.svelte";
 
   const titleBarProps = {
@@ -34,7 +34,7 @@
     <h2>Earnings by currency</h2>
     {#each $data.currencies as currency}
     <ListItem link={`/currency/${currency.ticker}`}>
-      <CoinSummary {...currency} />
+      <CurrencySummary {...currency} />
     </ListItem>
     {/each}
   </section>
@@ -57,6 +57,10 @@
 
   section {
     margin-top: 1.25rem;
+  }
+
+  section:last-child {
+    padding-bottom: 1.25rem;
   }
 
   section h2 {
