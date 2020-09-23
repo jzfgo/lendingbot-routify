@@ -7,6 +7,12 @@
 
   export let ticker;
 
+  const CURRENCY_FORMATTER = new Intl.NumberFormat('en', {
+    style: 'currency',
+    currency: 'USD',
+    maximumSignificantDigits: 3,
+  });
+
   const titleBarProps = {
     title: ticker.toLocaleUpperCase(),
   };
@@ -39,7 +45,18 @@
 
   <section class="estimation">
     <h2>Estimated earnings</h2>
-    <CurrencyDetails pct2={currency.averageLendingRate} value1label="year" value2label="month" value3label="day" pct1label="APY" pct2label="EDR" />
+    <CurrencyDetails
+      pct1={currency.yearlyRate}
+      pct2={currency.averageLendingRate}
+      value1={CURRENCY_FORMATTER.format(currency.estEarningsYear)}
+      value2={CURRENCY_FORMATTER.format(currency.estEarningsMonth)}
+      value3={CURRENCY_FORMATTER.format(currency.estEarnings24h)}
+      value1label="year"
+      value2label="month"
+      value3label="day"
+      pct1label="APY"
+      pct2label="EDR"
+    />
   </section>
 
   <section class="exchange">

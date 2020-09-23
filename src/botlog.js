@@ -34,17 +34,43 @@ const processCurrency = (ticker, data, displayCurrency) => {
   // 1 for the current display currency, display currency's exchange rate for the rest
   const exchangeRate = sameCurrency ? 1 : displayCurrency.highestBid;
 
+  const pctLent = lentSum / maxToLend;
+  const pctLentTotal = lentSum / totalCoins;
+
+  const earningsTotal = totalEarnings * tickerRate * exchangeRate;
+  const earningsYesterday = yesterdayEarnings * tickerRate * exchangeRate;
+  const earningsToday = todayEarnings * tickerRate * exchangeRate;
+
+  const netRate = averageLendingRate * 0.85;
+  const effectiveRate = netRate * pctLent;
+  const yearlyRate = effectiveRate * 365;
+  const yearlyRateCompound = (Math.pow(netRate + 1, 365) - 1) * 100 * pctLent; // with daily reinvestment
+
+  const estEarnings24h =
+    (lentSum * (1 + netRate) - lentSum) * tickerRate * exchangeRate;
+  const estEarningsMonth =
+    (lentSum * Math.pow(1 + netRate, 30) - lentSum) * tickerRate * exchangeRate;
+  const estEarningsYear =
+    (lentSum * Math.pow(1 + netRate, 365) - lentSum) *
+    tickerRate *
+    exchangeRate;
+
   return {
     averageLendingRate,
-    pctLent: lentSum / maxToLend,
-    pctLentTotal: lentSum / totalCoins,
-    earningsTotal: totalEarnings * tickerRate * exchangeRate,
-    earningsYesterday: yesterdayEarnings * tickerRate * exchangeRate,
-    earningsToday: todayEarnings * tickerRate * exchangeRate,
-    ticker: ticker.toLowerCase(),
+    earningsToday,
+    earningsTotal,
+    earningsYesterday,
+    estEarnings24h,
+    estEarningsMonth,
+    estEarningsYear,
     lentSum,
     maxToLend,
+    pctLent,
+    pctLentTotal,
+    ticker: ticker.toLowerCase(),
     totalCoins,
+    yearlyRate,
+    yearlyRateCompound,
   };
 };
 
@@ -68,6 +94,9 @@ const processCurrencies = (data) => {
       earningsTotal: a.earningsTotal + b.earningsTotal,
       earningsYesterday: a.earningsYesterday + b.earningsYesterday,
       earningsToday: a.earningsToday + b.earningsToday,
+      estEarnings24h: a.estEarnings24h + b.estEarnings24h,
+      estEarningsMonth: a.estEarningsMonth + b.estEarningsMonth,
+      estEarningsYear: a.estEarningsYear + b.estEarningsYear,
     }));
 
     return { currencies, summary };

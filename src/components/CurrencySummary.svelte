@@ -15,15 +15,10 @@
   export let ticker = 'btc';
   export let pctLent = .5;
   export let earningsTotal = 0;
-  export let earningsYesterday = 0;
   export let earningsToday = 0;
+  export let estEarnings24h = 0;
 
   const earningsTotalTween = tweened(0, {
-    duration: 400,
-    easing: cubicOut
-  });
-
-  const earningsYesterdayTween = tweened(0, {
     duration: 400,
     easing: cubicOut
   });
@@ -33,9 +28,14 @@
     easing: cubicOut
   });
 
+  const estEarnings24hTween = tweened(0, {
+    duration: 400,
+    easing: cubicOut
+  });
+
   $: earningsTotalTween.set(earningsTotal);
-  $: earningsYesterdayTween.set(earningsYesterday);
   $: earningsTodayTween.set(earningsToday);
+  $: estEarnings24hTween.set(estEarnings24h);
 </script>
 
 <div class="currency-summary">
@@ -46,8 +46,8 @@
   </div>
   <div class="earningsTotal">{CURRENCY_FORMATTER.format($earningsTotalTween)}</div>
   <div class="earnings24h">
-    <Indicator icon="piggy-bank" value={CURRENCY_FORMATTER.format($earningsYesterdayTween)} background={false} color="success" />
-    <Indicator icon="binoculars" value={CURRENCY_FORMATTER.format($earningsTodayTween)} background={false} color="warning" />
+    <Indicator icon="piggy-bank" value={CURRENCY_FORMATTER.format($earningsTodayTween)} background={false} color="success" />
+    <Indicator icon="binoculars" value={CURRENCY_FORMATTER.format($estEarnings24hTween)} background={false} color="warning" />
   </div>
   <div class="graph">
   </div>
@@ -74,19 +74,19 @@
     color: var(--color-spring-wood);
   }
 
-  .earningsYesterday,
-  .earningsToday {
+  .earningsToday,
+  .estEarnings24h {
     letter-spacing: 0;
     font-weight: 400;
     line-height: 0.875rem;
     font-size: 0.625rem;
   }
 
-  .earningsYesterday {
+  .earningsToday {
     color: var(--main-success-color);
   }
 
-  .earningsToday {
+  .estEarnings24h {
     color: var(--main-warning-color);
   }
 </style>

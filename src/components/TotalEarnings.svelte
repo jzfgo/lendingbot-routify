@@ -21,20 +21,20 @@
     easing: cubicOut
   });
 
-  const earningsYesterday = tweened(0, {
+  const earningsToday = tweened(0, {
     duration: 400,
     easing: cubicOut
   });
 
-  const earningsToday = tweened(0, {
+  const estEarnings24h = tweened(0, {
     duration: 400,
     easing: cubicOut
   });
 
   $: if (summary) {
     earningsTotal.set(summary.earningsTotal);
-    earningsYesterday.set(summary.earningsYesterday);
     earningsToday.set(summary.earningsToday);
+    estEarnings24h.set(summary.estEarnings24h);
   }
 </script>
 
@@ -49,13 +49,13 @@
       </div>
     </div>
     <div class="earnings-24h">
-      <Indicator size="regular" icon="piggy-bank" value={CURRENCY_FORMATTER.format($earningsYesterday)} color="success" />
+      <Indicator size="regular" icon="piggy-bank" value={CURRENCY_FORMATTER.format($earningsToday)} color="success" />
 
       <div class="label">
         <AngleLeftIcon width="32" /> 24h <AngleRightIcon width="32" />
       </div>
 
-      <Indicator size="regular" icon="binoculars" value={CURRENCY_FORMATTER.format($earningsToday)} color="warning" />
+      <Indicator size="regular" icon="binoculars" value={CURRENCY_FORMATTER.format($estEarnings24h)} color="warning" />
     </div>
   </div>
   <LineChart />
