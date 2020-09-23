@@ -114,7 +114,7 @@
     font-size: 1rem;
   }
 
-  .value-1 {
+  .value-1 .value {
     font-size: 1.5rem;
   }
 

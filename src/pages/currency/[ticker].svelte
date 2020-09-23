@@ -14,6 +14,7 @@
   $: [currency] = $data.currencies.filter(currency => currency.ticker === ticker);
 </script>
 
+{#if currency}
 <main>
   <TitleBar {...titleBarProps} />
 
@@ -45,6 +46,7 @@
     <h2>Exchange rate</h2>
   </section>
 </main>
+{/if}
 
 <style>
   main {
