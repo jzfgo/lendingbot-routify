@@ -1,8 +1,10 @@
 <script>
-  import { tweened } from 'svelte/motion';
-  import { cubicOut } from 'svelte/easing';
+  import { CURRENCY_FORMATTER } from '../formatters';
+  import { tweenFrom } from '../tweens';
+
   import Indicator from "../components/Indicator.svelte";
   import LineChart from "../components/LineChart.svelte";
+
   import CornerBottomLeftIcon from '../assets/images/corner-bottom-left.svg';
   import CornerBottomRightIcon from '../assets/images/corner-bottom-right.svg';
   import AngleLeftIcon from '../assets/images/angle-left.svg';
@@ -10,26 +12,9 @@
 
   export let summary;
 
-  const CURRENCY_FORMATTER = new Intl.NumberFormat('en', {
-    style: 'currency',
-    currency: 'USD',
-    maximumSignificantDigits: 3,
-  });
-
-  const earningsTotal = tweened(0, {
-    duration: 400,
-    easing: cubicOut
-  });
-
-  const earningsToday = tweened(0, {
-    duration: 400,
-    easing: cubicOut
-  });
-
-  const estEarnings24h = tweened(0, {
-    duration: 400,
-    easing: cubicOut
-  });
+  const earningsTotal = tweenFrom(0);
+  const earningsToday = tweenFrom(0);
+  const estEarnings24h = tweenFrom(0);
 
   $: if (summary) {
     earningsTotal.set(summary.earningsTotal);

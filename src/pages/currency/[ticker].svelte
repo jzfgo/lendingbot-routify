@@ -1,17 +1,13 @@
 <script>
-  import { data } from '../../stores'
+  import { data } from '../../stores';
+  import { CURRENCY_FORMATTER } from '../../formatters';
 
   import TitleBar from "../../components/TitleBar.svelte";
   import TotalEarnings from "../../components/TotalEarnings.svelte";
   import CurrencyDetails from "../../components/CurrencyDetails.svelte";
+  import CurrencyRate from "../../components/CurrencyRate.svelte";
 
   export let ticker;
-
-  const CURRENCY_FORMATTER = new Intl.NumberFormat('en', {
-    style: 'currency',
-    currency: 'USD',
-    maximumSignificantDigits: 3,
-  });
 
   const titleBarProps = {
     title: ticker.toLocaleUpperCase(),
@@ -59,9 +55,16 @@
     />
   </section>
 
+  {#if !currency.sameCurrency}
   <section class="exchange">
     <h2>Exchange rate</h2>
+    <CurrencyRate
+      ticker={currency.ticker}
+      rate={currency.tickerRate * currency.exchangeRate}
+      change24h={0}
+    />
   </section>
+  {/if}
 </main>
 {/if}
 

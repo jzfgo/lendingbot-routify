@@ -1,10 +1,7 @@
 <script>
-  import RadialGraph from './graphs/RadialGraph.svelte';
+  import { PERCENTAGE_FORMATTER } from '../formatters';
 
-  const PERCENTAGE_FORMATTER = new Intl.NumberFormat('en', {
-    style: 'percent',
-    maximumSignificantDigits: 3,
-  });
+  import RadialGraph from './graphs/RadialGraph.svelte';
 
   export let pct1 = 0;
   export let pct1label = ' ';
