@@ -11,20 +11,19 @@
 <style>
   .log-item {
     display: grid;
-    grid-template-columns: 5rem 1fr;
+    grid-template-columns: 5.625rem 1fr;
     grid-gap: 0.625rem;
 
     margin-bottom: 0.625rem;
-    letter-spacing: 0;
-    font-weight: 700;
-    font-size: 0.75rem;
+    font-size: 0.875rem;
 }
 
   .time {
-    color: var(--color-vivid-tangerine);
+    font-weight: 700;
     text-align: center;
     border-radius: 0.1875rem;
     background-color: var(--color-charade);
+    color: var(--color-vivid-tangerine);
   }
 
   .message {
